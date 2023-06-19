@@ -18,6 +18,9 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    // * IEnumerable is not imported because its already implicitly imported by enabling
+    // * <ImplicitUsings>enable</ImplicitUsings> in API.csproj
+
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
