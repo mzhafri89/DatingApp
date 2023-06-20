@@ -456,3 +456,5 @@ $RECYCLE.BIN/
 ##env files
 API/appsettings.Development.json
 API/appsettings.json
+API/datingapp.db-shm
+API/datingapp.db-wal
