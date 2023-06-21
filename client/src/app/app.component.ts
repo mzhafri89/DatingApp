@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('https://localhost:5001/api/users').subscribe({
+    this.http.get('http://localhost:5000/api/users').subscribe({
       next: (response) => {
         this.users = response as User[];
       },
