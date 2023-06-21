@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    // * ControllerBase is a class that doesn't have view support
-    public class UsersController : ControllerBase
+    // * Extends BaseApiController
+    public class UsersController : BaseApiController
     {
         private readonly DataContext context;
 
