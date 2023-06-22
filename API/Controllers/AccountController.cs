@@ -1,6 +1,7 @@
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -12,10 +13,12 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly DataContext context;
+        private readonly ITokenService tokenService;
 
-        public AccountController(DataContext context)
+        public AccountController(DataContext context, ITokenService tokenService)
         {
             this.context = context;
+            this.tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -23,7 +26,7 @@ namespace API.Controllers
 
         // * By default the body of the request is not bound to the parameters of the method
         // * only query strings and route parameters are bound by default
-        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDTO)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDTO)
         // * DTO would be bind automatically to the body of the request
         {
             // * Check if username already exists
@@ -45,12 +48,12 @@ namespace API.Controllers
             context.AppUsers.Add(user);
             await context.SaveChangesAsync();
 
-            return user;
+            return new UserDto { Username = user.UserName, Token = tokenService.CreateToken(user) };
         }
 
         [HttpPost("login")]
         // * Handle login requests @ /api/account/login
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDTO)
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDTO)
         {
             // * Find user by username - SingleOrDefault is used because were not using a primary key
             var user = await context.AppUsers.SingleOrDefaultAsync(
@@ -75,7 +78,7 @@ namespace API.Controllers
                     return Unauthorized("Invalid password");
             }
 
-            return user;
+            return new UserDto { Username = user.UserName, Token = tokenService.CreateToken(user) };
         }
 
         private async Task<bool> UserExists(string username)
