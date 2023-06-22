@@ -23,7 +23,7 @@ namespace API.Controllers
 
         // * By default the body of the request is not bound to the parameters of the method
         // * only query strings and route parameters are bound by default
-        public async Task<ActionResult<AppUser>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<AppUser>> Register(RegisterDto registerDTO)
         // * DTO would be bind automatically to the body of the request
         {
             // * Check if username already exists
@@ -44,6 +44,36 @@ namespace API.Controllers
             // * Add user to database
             context.AppUsers.Add(user);
             await context.SaveChangesAsync();
+
+            return user;
+        }
+
+        [HttpPost("login")]
+        // * Handle login requests @ /api/account/login
+        public async Task<ActionResult<AppUser>> Login(LoginDto loginDTO)
+        {
+            // * Find user by username - SingleOrDefault is used because were not using a primary key
+            var user = await context.AppUsers.SingleOrDefaultAsync(
+                user => user.UserName == loginDTO.Username.ToLower()
+            );
+
+            // * If user does not exist
+            if (user == null)
+                return Unauthorized("Invalid credentials");
+
+            // * Create new HMACSHA512 object with the password salt
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            // * Compute hash of the password provided by the user
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));
+
+            // * Compare the computed hash with the password hash stored in the database
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                // * If the hashes do not match
+                if (computedHash[i] != user.PasswordHash[i])
+                    return Unauthorized("Invalid password");
+            }
 
             return user;
         }
