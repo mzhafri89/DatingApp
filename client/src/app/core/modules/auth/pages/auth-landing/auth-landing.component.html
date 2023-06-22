@@ -5,7 +5,7 @@
   <div class="card text-center">
     <div class="card-body">
       <h5 class="card-title">Login</h5>
-      <form>
+      <form [formGroup]="form" (submit)="submit()">
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
           <input
@@ -13,6 +13,7 @@
             class="form-control"
             id="username"
             placeholder="Enter your username"
+            formControlName="username"
           />
         </div>
         <div class="mb-3">
@@ -22,6 +23,7 @@
             class="form-control"
             id="password"
             placeholder="Enter your password"
+            formControlName="password"
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
