@@ -9,5 +9,9 @@ namespace API.Entities
 
         // * Dot net 6+ allows for nullables string, can be disabled in API.csproj
         public string UserName { get; set; }
+
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
     }
 }

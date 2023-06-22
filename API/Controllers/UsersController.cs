@@ -1,14 +1,15 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    // * ControllerBase is a class that doesn't have view support
-    public class UsersController : ControllerBase
+    // * Only allow authorized users to access this controller
+    [Authorize]
+    // * Extends BaseApiController
+    public class UsersController : BaseApiController
     {
         private readonly DataContext context;
 
@@ -17,6 +18,8 @@ namespace API.Controllers
             this.context = context;
         }
 
+        // * Allow anonymous access to this method
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
