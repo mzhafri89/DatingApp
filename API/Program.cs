@@ -2,7 +2,9 @@
 
 // * Create web application instance
 using API.Data;
+using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,12 @@ builder.Services.AddCors(opt =>
         }
     );
 });
+
+// * Add authentication services
+// * scoped - service is created once per client request
+// * singleton - service is created once and reused
+// * transient - service is created each time it is requested
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
