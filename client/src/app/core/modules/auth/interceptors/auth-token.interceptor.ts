@@ -11,13 +11,19 @@ import { AuthState } from '../store/auth.reducer';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<{ auth: AuthState }>) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = this.store.select((state) => state.token.access);
+    const token$ = this.store.select((state) => {
+      return state.auth.token.access;
+    });
+
+    let token: string | null = null;
+
+    token$.subscribe((storeToken) => (token = storeToken));
 
     if (!token) {
       return next.handle(request);

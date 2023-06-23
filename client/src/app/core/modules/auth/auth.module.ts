@@ -8,6 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import authReducer from './store/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth.effects';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 
 @NgModule({
   declarations: [AuthLandingComponent],
@@ -17,6 +19,13 @@ import { AuthEffects } from './store/auth.effects';
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects]),
     RouterModule.forChild([{ path: '', component: AuthLandingComponent }]),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
   ],
 })
 export class AuthModule {}
