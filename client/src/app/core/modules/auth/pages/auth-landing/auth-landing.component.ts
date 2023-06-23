@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { login } from '../../store/auth.actions';
 
 @Component({
   selector: 'app-auth-landing',
@@ -13,7 +15,7 @@ export class AuthLandingComponent implements OnInit {
     password: FormControl<string>;
   }>;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     // @ts-ignore
@@ -25,5 +27,11 @@ export class AuthLandingComponent implements OnInit {
 
   submit() {
     console.log(this.form.value);
+    this.store.dispatch(
+      login({
+        username: this.form.value.username!,
+        password: this.form.value.password!,
+      })
+    );
   }
 }
