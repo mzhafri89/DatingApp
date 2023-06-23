@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { AuthState } from '../../../auth/store/auth.reducer';
+import { LOGOUT } from '../../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-main-landing',
@@ -7,9 +11,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./main-landing.component.css'],
 })
 export class MainLandingComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {}
 
   ngOnInit(): void {
     this.router.navigate(['list'], { relativeTo: this.route });
+  }
+
+  logout() {
+    this.store.dispatch({ type: LOGOUT });
+    this.router.navigate(['auth']);
   }
 }

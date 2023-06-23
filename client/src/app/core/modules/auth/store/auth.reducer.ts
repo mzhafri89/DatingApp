@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { authenticated } from './auth.actions';
+import { authenticated, logout } from './auth.actions';
 
 export interface AuthState {
   token: {
@@ -31,5 +31,6 @@ export default createReducer(
     user: {
       name: action.username,
     },
-  }))
+  })),
+  on(logout, () => initialState)
 );
