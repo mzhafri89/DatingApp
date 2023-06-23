@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { authenticated } from './auth.actions';
 
-interface AuthState {
+export interface AuthState {
   token: {
     access: null | string;
     refresh: null | string;
