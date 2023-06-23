@@ -5,16 +5,13 @@ import { User } from 'src/app/core/interfaces/user.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceService {
+export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.post<User & { token: string }>(
-      'http://localhost:5000/api/account/login',
-      {
-        username,
-        password,
-      }
-    );
+    return this.http.post<User>('http://localhost:5000/api/account/login', {
+      username,
+      password,
+    });
   }
 }
