@@ -8,12 +8,14 @@ import { StoreModule } from '@ngrx/store';
 import authReducer from './store/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AuthLandingComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects]),
     RouterModule.forChild([{ path: '', component: AuthLandingComponent }]),
