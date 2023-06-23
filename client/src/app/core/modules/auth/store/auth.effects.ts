@@ -24,8 +24,7 @@ export class AuthEffects {
             this.router.navigate(['main'], { relativeTo: this.route });
 
             return authenticated({
-              userName: response.userName,
-              id: response.id,
+              username: response.username,
               token: response.token,
             });
           })

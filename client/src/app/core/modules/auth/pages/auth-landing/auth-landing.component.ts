@@ -26,7 +26,6 @@ export class AuthLandingComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
     this.store.dispatch(
       login({
         username: this.form.value.username!,
