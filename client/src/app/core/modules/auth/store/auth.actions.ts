@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/share/interfaces/user.interface';
+import Auth from '../interfaces/auth.interface';
 
 export const LOGIN = '[Auth] Login';
 export const AUTHENTICATED = '[Auth] Authenticated';
@@ -13,9 +13,6 @@ export const login = createAction(
   }>()
 );
 
-export const authenticated = createAction(
-  AUTHENTICATED,
-  props<User & { token: string }>()
-);
+export const authenticated = createAction(AUTHENTICATED, props<Auth>());
 
 export const logout = createAction(LOGOUT);
