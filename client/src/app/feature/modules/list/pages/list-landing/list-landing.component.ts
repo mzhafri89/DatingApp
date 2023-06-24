@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/share/interfaces/user.interface';
+import { UsersService } from 'src/app/share/services/users.service';
 
 @Component({
   selector: 'app-list-landing',
@@ -10,19 +11,15 @@ import { User } from 'src/app/share/interfaces/user.interface';
 export class ListLandingComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/api/users').subscribe({
-      next: (response) => {
-        this.users = response as User[];
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users as User[];
       },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        console.log('complete');
-      },
+      error: (err) => console.error(err),
+      complete: () => console.log('complete'),
     });
   }
 }
