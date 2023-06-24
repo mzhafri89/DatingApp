@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Renderer2,
 } from '@angular/core';
 
 @Directive({
@@ -11,18 +12,15 @@ import {
 export class DropdownDirective {
   @HostBinding('class.show') isOpen = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('click') toggleOpen() {
     this.isOpen = !this.isOpen;
+    const dropdownMenu = this.el.nativeElement.querySelector('.dropdown-menu');
     if (this.isOpen) {
-      this.el.nativeElement
-        .querySelector('.dropdown-menu')
-        .classList.add('show');
+      this.renderer.addClass(dropdownMenu, 'show');
     } else {
-      this.el.nativeElement
-        .querySelector('.dropdown-menu')
-        .classList.remove('show');
+      this.renderer.removeClass(dropdownMenu, 'show');
     }
   }
 }
