@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/core/interfaces/user.interface';
+import { User } from 'src/app/share/interfaces/user.interface';
 
 @Component({
   selector: 'app-list-landing',

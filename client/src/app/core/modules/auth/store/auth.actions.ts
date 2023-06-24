@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/core/interfaces/user.interface';
+import { User } from 'src/app/share/interfaces/user.interface';
 
 export const LOGIN = '[Auth] Login';
 export const AUTHENTICATED = '[Auth] Authenticated';
