@@ -10,16 +10,23 @@ import authReducer from './store/auth.reducer';
 import { AuthEffects } from './store/auth.effects';
 import { AuthLandingComponent } from './pages/auth-landing/auth-landing.component';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
-  declarations: [AuthLandingComponent],
+  declarations: [AuthLandingComponent, RegisterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects]),
-    RouterModule.forChild([{ path: '', component: AuthLandingComponent }]),
+    RouterModule.forChild([
+      { path: '', component: AuthLandingComponent },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+    ]),
   ],
   providers: [
     {
