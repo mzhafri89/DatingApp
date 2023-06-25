@@ -1,41 +1,4 @@
-<div
-  class="d-flex justify-content-center align-items-center"
-  style="height: 100vh"
->
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Tanda</h5>
-      <form [formGroup]="form" (submit)="submit()">
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            placeholder="Enter your username"
-            formControlName="username"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Enter your password"
-            formControlName="password"
-          />
-        </div>
-        <div class="d-flex justify-content-center">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            [disabled]="form.invalid"
-          >
-            Login
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<app-login-register-form
+  mode="login"
+  (onSubmit)="submit($event)"
+></app-login-register-form>

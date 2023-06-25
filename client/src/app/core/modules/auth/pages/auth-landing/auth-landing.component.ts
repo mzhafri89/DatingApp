@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { login } from '../../store/auth.actions';
+import { LoginRegisterFormData } from '../../components/login-register-form/login-register-form.component';
 
 @Component({
   selector: 'app-auth-landing',
@@ -31,12 +32,7 @@ export class AuthLandingComponent implements OnInit {
     });
   }
 
-  submit() {
-    this.store.dispatch(
-      login({
-        username: this.form.value.username!,
-        password: this.form.value.password!,
-      })
-    );
+  submit(data: LoginRegisterFormData) {
+    this.store.dispatch(login(data));
   }
 }
