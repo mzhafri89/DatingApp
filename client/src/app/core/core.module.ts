@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 
 import { AuthModule } from './modules/auth/auth.module';
 import { ErrorComponent } from './pages/error/error.component';
+import { authGuard } from './modules/auth/guards/auth.guard';
 
 @NgModule({
   declarations: [ErrorComponent],
@@ -20,6 +21,7 @@ import { ErrorComponent } from './pages/error/error.component';
         },
         {
           path: 'main',
+          canActivate: [authGuard],
           loadChildren: () =>
             import('./modules/main/main.module').then((m) => m.MainModule),
         },
