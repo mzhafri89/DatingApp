@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { authenticated, logout } from './auth.actions';
+import { authenticated, logout, setToken } from './auth.actions';
 
 export interface AuthState {
   token: {
@@ -32,5 +32,16 @@ export default createReducer(
       name: action.username,
     },
   })),
-  on(logout, () => initialState)
+  on(logout, () => initialState),
+  on(setToken, (state, action) => {
+    console.log('setToken', action);
+
+    return {
+      ...state,
+      token: {
+        ...state.token,
+        access: action.token,
+      },
+    };
+  })
 );

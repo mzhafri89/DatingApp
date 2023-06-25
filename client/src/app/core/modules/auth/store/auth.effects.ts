@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '../services/auth.service';
 
-import { authenticated, login } from './auth.actions';
-import { exhaustMap, map, switchMap } from 'rxjs';
+import { authenticated, login, autoLogin, setToken } from './auth.actions';
+import { exhaustMap, map, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
@@ -21,6 +21,8 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.login(action.username, action.password).pipe(
           map((response) => {
+            localStorage.setItem('token', response.token);
+
             this.router.navigate(['main'], { relativeTo: this.route });
 
             return authenticated({
@@ -30,6 +32,21 @@ export class AuthEffects {
           })
         )
       )
+    )
+  );
+
+  autoLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autoLogin),
+      exhaustMap((action) => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+          return of({ type: 'NO_ACTION' });
+        }
+
+        return of(setToken({ token }));
+      })
     )
   );
 }

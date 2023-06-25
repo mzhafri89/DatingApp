@@ -23,7 +23,9 @@ export class AuthTokenInterceptor implements HttpInterceptor {
 
     let token: string | null = null;
 
-    token$.subscribe((storeToken) => (token = storeToken));
+    token$.subscribe((storeToken) => {
+      token = storeToken;
+    });
 
     if (!token) {
       return next.handle(request);
