@@ -33,15 +33,11 @@ export default createReducer(
     },
   })),
   on(logout, () => initialState),
-  on(setToken, (state, action) => {
-    console.log('setToken', action);
-
-    return {
-      ...state,
-      token: {
-        ...state.token,
-        access: action.token,
-      },
-    };
-  })
+  on(setToken, (state, action) => ({
+    ...state,
+    token: {
+      ...state.token,
+      access: action.token,
+    },
+  }))
 );

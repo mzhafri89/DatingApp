@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { environment } from 'src/environments/environment';
 import Auth from '../interfaces/auth.interface';
 
 @Injectable({
@@ -10,7 +11,14 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.post<Auth>('http://localhost:5000/api/account/login', {
+    return this.http.post<Auth>(`${environment.apiUrl}/account/login`, {
+      username,
+      password,
+    });
+  }
+
+  register(username: string, password: string) {
+    return this.http.post<Auth>(`${environment.apiUrl}/account/register`, {
       username,
       password,
     });
