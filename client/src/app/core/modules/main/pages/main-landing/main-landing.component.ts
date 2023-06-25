@@ -23,6 +23,7 @@ export class MainLandingComponent implements OnInit {
 
   logout() {
     this.store.dispatch({ type: LOGOUT });
+    localStorage.clear();
     this.router.navigate(['auth']);
   }
 }
