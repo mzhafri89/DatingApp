@@ -24,9 +24,9 @@
       </ul>
       <div class="dropdown" dropdown>
         <button class="btn btn-secondary dropdown-toggle" type="button">
-          Welcome {{ name$ | async }}
+          Welcome {{ name$ | async | titlecase | slice : 0 : 10 }}
         </button>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" style="margin-top: 5px">
           <li><a class="dropdown-item" href="#">Edit Profile</a></li>
           <li>
             <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
