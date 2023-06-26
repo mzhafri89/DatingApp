@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { AuthState } from '../../../auth/store/auth.reducer';
 import { LOGOUT } from '../../../auth/store/auth.actions';
-import { User } from 'src/app/share/interfaces/user.interface';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-landing',
