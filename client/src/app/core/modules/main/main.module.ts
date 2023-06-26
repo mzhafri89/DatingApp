@@ -22,6 +22,20 @@ import { ShareModule } from 'src/app/share/share.module';
                 (m) => m.ListModule
               ),
           },
+          {
+            path: 'members',
+            loadChildren: () =>
+              import('../../../feature/modules/members/members.module').then(
+                (m) => m.MembersModule
+              ),
+          },
+          {
+            path: 'messages',
+            loadChildren: () =>
+              import('../../../feature/modules/messages/messages.module').then(
+                (m) => m.MessagesModule
+              ),
+          },
         ],
       },
     ]),
