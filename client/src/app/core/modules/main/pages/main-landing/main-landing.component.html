@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="list">Tanda</a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="members" routerLinkActive="active"
+            >Matches</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="list" routerLinkActive="active"
+            >List</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="messages" routerLinkActive="active"
+            >Messages</a
+          >
+        </li>
+      </ul>
+      <div class="dropdown" dropdown>
+        <button class="btn btn-secondary dropdown-toggle" type="button">
+          Welcome {{ name$ | async | titlecase | slice : 0 : 10 }}
+        </button>
+        <ul class="dropdown-menu" style="margin-top: 5px">
+          <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+          <li>
+            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>
