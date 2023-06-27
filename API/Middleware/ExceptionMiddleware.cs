@@ -46,7 +46,11 @@ namespace API.Middleware
                         ex.Message,
                         ex.StackTrace?.ToString()
                     )
-                    : new APIException(context.Response.StatusCode, "Internal Server Error", null);
+                    : new APIException(
+                        context.Response.StatusCode,
+                        ex.Message,
+                        "Internal Server Error"
+                    );
 
                 // * Serialize the response body
                 var options = new JsonSerializerOptions
