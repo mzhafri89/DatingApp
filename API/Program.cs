@@ -2,6 +2,7 @@
 
 // * Create web application instance
 using API.Extensions;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,10 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
-// * Middlewares section
+// * Middlewares pipeline section
+
+//* Use exception middleware
+app.UseMiddleware<ExceptionMiddleware>();
 
 // * Use cors policy
 app.UseCors("CorsPolicy");
