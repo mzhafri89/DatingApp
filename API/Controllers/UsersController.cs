@@ -18,8 +18,6 @@ namespace API.Controllers
             this.context = context;
         }
 
-        // * Allow anonymous access to this method
-        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
