@@ -3,6 +3,7 @@
 // * Create web application instance
 using API.Data;
 using API.Extensions;
+using API.Helpers;
 using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,7 @@ builder.Services
     .AddJsonOptions(options =>
     {
         // * Add date only converter
-        options.JsonSerializerOptions.Converters.Add(
-            new System.Text.Json.Serialization.JsonConverter_DateOnly()
-        );
+        options.JsonSerializerOptions.Converters.Add(new DateOnlyConverter());
     });
 
 // * Add application services
