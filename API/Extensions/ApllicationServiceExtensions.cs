@@ -39,6 +39,7 @@ namespace API.Extensions
             //* singleton - service is created once and reused
             //* transient - service is created each time it is requested
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
