@@ -41,9 +41,10 @@ namespace API.Entities
 
         // * Extension method to calculate age
         // * Will be used in AutoMapperProfiles.cs to map the age
-        public int GetAge()
-        {
-            return DateOfBirth.CalculateAge();
-        }
+        // * Using this would result in EF to include all col un related to dto
+        // public int GetAge()
+        // {
+        //     return DateOfBirth.CalculateAge();
+        // }
     }
 }

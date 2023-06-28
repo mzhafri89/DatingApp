@@ -1,3 +1,4 @@
+using API.DTOs;
 using API.Entities;
 
 // ! Dont specify action result type here causes weird bug, assume
@@ -15,5 +16,9 @@ namespace API.Services
         Task<AppUser> GetUserByIdAsync(int id);
 
         Task<AppUser> GetUserByUsernameAsync(string username);
+
+        Task<IEnumerable<MemberDto>> GetMembersAsync();
+
+        Task<MemberDto> GetMemberByUsernameAsync(string username);
     }
 }
