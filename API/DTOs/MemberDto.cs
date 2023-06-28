@@ -7,6 +7,8 @@ namespace API.DTOs
         // * Dot net 6+ allows for nullables string, can be disabled in API.csproj
         public string UserName { get; set; }
 
+        public string PhotoUrl { get; set; }
+
         public int Age { get; set; }
 
         public string KnownAs { get; set; }

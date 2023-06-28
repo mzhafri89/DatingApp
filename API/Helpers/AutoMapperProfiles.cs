@@ -9,7 +9,15 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             // * Map from AppUser to MemberDto
-            CreateMap<AppUser, MemberDto>();
+            CreateMap<AppUser, MemberDto>()
+                // * Map the PhotoUrl property of the MemberDto to the PhotoUrl property of the AppUser
+                .ForMember(
+                    memberDto => memberDto.PhotoUrl,
+                    memberOptions =>
+                        memberOptions.MapFrom(
+                            appUser => appUser.Photos.FirstOrDefault(photo => photo.IsMain).Url
+                        )
+                );
             CreateMap<Photo, PhotoDto>();
         }
     }
