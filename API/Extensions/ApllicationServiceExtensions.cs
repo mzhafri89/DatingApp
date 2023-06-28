@@ -39,7 +39,11 @@ namespace API.Extensions
             //* singleton - service is created once and reused
             //* transient - service is created each time it is requested
             services.AddScoped<ITokenService, TokenService>();
+            // * Tells the application to use the repository for the interface IUserRepository
+            // * when the interface is requested
             services.AddScoped<IUserRepository, UserRepository>();
+            // * Use the automapper profile
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             return services;
         }

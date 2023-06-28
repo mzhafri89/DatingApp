@@ -1,6 +1,7 @@
 using API.Entities;
-using Microsoft.AspNetCore.Mvc;
 
+// ! Dont specify action result type here causes weird bug, assume
+// ! the concrete class would know how to get the return type
 namespace API.Services
 {
     public interface IUserRepository
@@ -9,7 +10,7 @@ namespace API.Services
 
         Task<bool> SaveAllAsync();
 
-        Task<ActionResult<IEnumerable<AppUser>>> GetUsersAsync();
+        Task<IEnumerable<AppUser>> GetUsersAsync();
 
         Task<AppUser> GetUserByIdAsync(int id);
 

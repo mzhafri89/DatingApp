@@ -40,6 +40,7 @@ namespace API.Entities
         public List<Photo> Photos { get; set; } = new List<Photo>();
 
         // * Extension method to calculate age
+        // * Will be used in AutoMapperProfiles.cs to map the age
         public int GetAge()
         {
             return DateOfBirth.CalculateAge();
