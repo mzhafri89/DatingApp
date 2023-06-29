@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import Member from 'src/app/share/interfaces/member.interface';
 
 @Component({
@@ -8,4 +8,11 @@ import Member from 'src/app/share/interfaces/member.interface';
 })
 export class MemberCardComponent {
   @Input() member: Member | undefined;
+
+  @Output() onDetailClick: EventEmitter<Pick<Member, 'userName'>> =
+    new EventEmitter<Pick<Member, 'userName'>>();
+
+  handleDetailClick(): void {
+    this.onDetailClick.emit({ userName: this.member!.userName });
+  }
 }

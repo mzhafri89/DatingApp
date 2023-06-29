@@ -8,19 +8,23 @@ import { MemberDetailComponent } from './pages/member-detail/member-detail.compo
 import { MemberCardComponent } from './components/member-card/member-card.component';
 
 @NgModule({
-  declarations: [MemberListComponent, MemberDetailComponent, MemberCardComponent],
+  declarations: [
+    MemberListComponent,
+    MemberDetailComponent,
+    MemberCardComponent,
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule.forChild([
       {
+        path: ':username',
+        component: MemberDetailComponent,
+      },
+      {
         path: '',
         pathMatch: 'full',
         component: MemberListComponent,
-      },
-      {
-        path: ':id',
-        component: MemberDetailComponent,
       },
     ]),
   ],

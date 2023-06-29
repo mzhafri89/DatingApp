@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { MembersService } from '../../services/members.service';
 import Member from 'src/app/share/interfaces/member.interface';
 
@@ -10,7 +12,11 @@ import Member from 'src/app/share/interfaces/member.interface';
 export class MemberListComponent implements OnInit {
   members: Member[] | undefined;
 
-  constructor(private membersService: MembersService) {}
+  constructor(
+    private membersService: MembersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadMembers();
@@ -22,5 +28,9 @@ export class MemberListComponent implements OnInit {
         this.members = members;
       },
     });
+  }
+
+  handleDetailClick({ userName }: Pick<Member, 'userName'>): void {
+    this.router.navigate([userName], { relativeTo: this.route });
   }
 }
