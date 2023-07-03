@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MemberListComponent } from './pages/member-list/member-list.component';
 import { MemberDetailComponent } from './pages/member-detail/member-detail.component';
 import { MemberCardComponent } from './components/member-card/member-card.component';
+import { ShareModule } from 'src/app/share/share.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MemberCardComponent } from './components/member-card/member-card.compon
   imports: [
     CommonModule,
     HttpClientModule,
+    ShareModule,
     RouterModule.forChild([
       {
         path: ':username',
